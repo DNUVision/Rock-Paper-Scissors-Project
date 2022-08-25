@@ -9,10 +9,9 @@ same will be for player choosing Scissors or Paper
 each time there is a result
 the result is kept to that turn's winner
 the game will be played for 5 turns
-
-
 */
 
+//The function decleration presented below is the player's choice using promot, converting to uppercase and storing the value if the user entered it correctly. 
 function getPlayerChoice(){
     let selection = prompt("Please choose either Rock, Scissors or Paper: ").toUpperCase();
     let userResult;
@@ -25,7 +24,10 @@ function getPlayerChoice(){
         return getPlayerChoice();
         }
     }
-    
+
+/*The function decleration presented below is the computer's choice.
+  random and floor methods are being used to generate a value between 0 and 2
+  afterwards there is a switch statmenet that assigns each number to a value */    
 function getComputerChoice(){
     const comSelection = Math.floor(Math.random()*3);
     //console.log(comSelection);
@@ -43,7 +45,11 @@ function getComputerChoice(){
         }
     return result;
 }
-    
+
+/* two variables initialized and will be used to count the score
+   I used function playRound() to pass the prior two functions as callbacks
+   the callbacks return the values stored in them and they are compared
+   in the if statmenet, and each one is getting a score accordingly */
 let playerCounter = 0;
 let computerCounter = 0;    
 function playRound(player, computer){
@@ -63,7 +69,8 @@ function playRound(player, computer){
     }
 
 }
-    
+
+//inside the function game(), I call playRound() for 5 rounds in the console. 
 function game(){
     for(let i = 0; i < 5; i++){
         console.log("Round #" + (i+1));
