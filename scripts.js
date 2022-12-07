@@ -56,6 +56,7 @@ function playRound(player, computer){
     appender.appendChild(newElem);
     totalScore.textContent = "Computer: " + computerCounter + ", Player: " + playerCounter + ".";
     appender.appendChild(totalScore);
+    
 }
 
 //inside the function game(), I call playRound() for 5 rounds in the console. 
