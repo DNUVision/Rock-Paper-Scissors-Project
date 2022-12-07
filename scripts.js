@@ -11,19 +11,6 @@ the result is kept to that turn's winner
 the game will be played for 5 turns
 */
 
-//The function decleration presented below is the player's choice using promot, converting to uppercase and storing the value if the user entered it correctly. 
-function getPlayerChoice(){
-    let selection = prompt("Please choose either Rock, Scissors or Paper: ").toUpperCase();
-    let userResult;
-    if(selection == "ROCK" || selection == "SCISSORS" || selection == "PAPER"){
-        console.log("This is the user's selection: " + selection);
-        userResult = selection;
-        return userResult;
-    }else{
-        alert("You chose wrong. Try again please.");
-        return getPlayerChoice();
-        }
-    }
 
 /*The function decleration presented below is the computer's choice.
   random and floor methods are being used to generate a value between 0 and 2
@@ -50,35 +37,58 @@ function getComputerChoice(){
    I used function playRound() to pass the prior two functions as callbacks
    the callbacks return the values stored in them and they are compared
    in the if statmenet, and each one is getting a score accordingly */
-let playerCounter = 0;
-let computerCounter = 0;    
-function playRound(player, computer){
-    console.log("This is " + player + " and " + computer);
-    if((player == "ROCK" && computer == "PAPER") || (player == "PAPER" && computer == "SCISSORS") || (player == "SCISSORS" && computer == "ROCK")){
-        console.log("Player lost, Computer wins!");
-        //computerCounter++;
-        //console.log("computer score is: " + computerCounter);
-        return computerCounter++;
-    }else if((player == "ROCK" && computer == "SCISSORS") || (player == "SCISSORS" && computer == "PAPER") || (player == "PAPER" && computer == "ROCK")){
-        console.log("Computer lost, Player wins!");
-        //playerCounter++;
-        //console.log("player score is: " + playerCounter);
-        return playerCounter++;
-    }else{
-        console.log("No one wins, it is a TIE!");
-    }
 
+let playerCounter = 0;
+let computerCounter = 0;   
+const newElem = document.createElement("div");
+const totalScore = document.createElement("div"); 
+function playRound(player, computer){
+    if((player == "ROCK" && computer == "PAPER") || (player == "PAPER" && computer == "SCISSORS") || (player == "SCISSORS" && computer == "ROCK")){
+        newElem.textContent = "Player lost, Computer wins!";
+        computerCounter++;
+    }else if((player == "ROCK" && computer == "SCISSORS") || (player == "SCISSORS" && computer == "PAPER") || (player == "PAPER" && computer == "ROCK")){
+        newElem.textContent = "Computer lost, Player wins!";
+        playerCounter++;
+    }else{
+        newElem.textContent = "No one wins, it is a TIE!";
+    }
+    const appender = document.querySelector(".container");
+    appender.appendChild(newElem);
+    totalScore.textContent = "Computer: " + computerCounter + ", Player: " + playerCounter + ".";
+    appender.appendChild(totalScore);
 }
 
 //inside the function game(), I call playRound() for 5 rounds in the console. 
 function game(){
-    for(let i = 0; i < 5; i++){
-        console.log("Round #" + (i+1));
-        console.log("Current Player's score is: " + playerCounter);
-        console.log("Current Computer's score is: " + computerCounter);
-        playRound(getPlayerChoice(), getComputerChoice());
-    }
-    console.log("After five rounds the overall score is \nPlayer score: " + playerCounter + " vs Computer score: " + computerCounter);
+    //for(let i = 0; i < 5; i++){
+        //console.log("Round #" + (i+1));
+        //console.log("Current Player's score is: " + playerCounter);
+        //console.log("Current Computer's score is: " + computerCounter); 
+        //playRound(getPlayerChoice(), getComputerChoice());
+    //}
+    let select;
+    const i = document.querySelectorAll("button");
+    const looper = i.forEach((val)=>{
+        val.addEventListener("click", (e)=> {
+            select = e.target.value;
+            playRound(select, getComputerChoice());
+
+            if(computerCounter == 5 && computerCounter > playerCounter){
+                totalScore.textContent = "Computer Wins! Overall score is - Computer: " + computerCounter + " vs Player: " + playerCounter + ".";
+                computerCounter = 0;
+                playerCounter = 0;
+            }
+            if(playerCounter == 5 && playerCounter > computerCounter){
+                totalScore.textContent = "Player Wins! Overall score is - Player: " + playerCounter + " vs Computer: " + computerCounter + "."; 
+                computerCounter = 0;
+                playerCounter = 0;
+            }
+        });
+    });
+
+
+
+    /*console.log("After five rounds the overall score is \nPlayer score: " + playerCounter + " vs Computer score: " + computerCounter);
     if(playerCounter > computerCounter){
         console.log("Player won the five round tournament!");
     }else if(computerCounter > playerCounter){
@@ -86,7 +96,51 @@ function game(){
     }else{
         console.log("No one won, the five round tournament ended in a DRAW!");
     }
+    */
 }
+
+
 
     
 game();
+
+
+/*const btnFocus = document.querySelectorAll("button");
+btnFocus.forEach((btnObj) => {
+    btnObj.addEventListener("click", getPlayerChoice);
+
+    function myChoice(){
+        const newElem = document.createElement("div");
+        newElem.textContent = btnObj.textContent;
+        document.body.appendChild(newElem);
+    }
+}); */
+//The function decleration presented below is the player's choice using promot, converting to uppercase and storing the value if the user entered it correctly. 
+//function getPlayerChoice(){
+//    let selection;
+//    let userResult;
+    
+
+
+
+   /* const btnFocus = document.querySelectorAll("button");
+    btnFocus.forEach((btnObj) => {
+        btnObj.addEventListener("click", (e) =>{
+            selection = e.target.value;
+            //let selection = prompt("Please choose either Rock, Scissors or Paper: ").toUpperCase();
+            if(selection == "ROCK" || selection == "SCISSORS" || selection == "PAPER"){
+            console.log("This is the user's selection: " + selection);
+            userResult = selection;
+            return userResult;
+            }});
+    });*/
+    //let selection = prompt("Please choose either Rock, Scissors or Paper: ").toUpperCase();
+   //if(selection == "ROCK" || selection == "SCISSORS" || selection == "PAPER"){
+   //     console.log("This is the user's selection: " + selection);
+   //     userResult = selection;
+   //     return userResult;
+   // }/*else{
+   //     alert("You chose wrong. Try again please.");
+   //     return getPlayerChoice();
+   //     }  */
+   // }

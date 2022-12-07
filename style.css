@@ -1,0 +1,36 @@
+.container{
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
+}
+
+h1{
+    font-family: Verdana, sans-serif;
+    font-style: italic;
+    margin-bottom: 80px;
+}
+
+.games-btns{
+    margin-bottom: 25px;
+}
+
+button{
+    padding: 10px 30px;
+    font-size: 24px;
+    font-family: sans-serif;
+    background-color: teal;
+    color: white;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 8px 5px grey;
+}
+
+button:hover{
+    background-color: navy;
+}
+button:active{
+    background-color: navy;
+    box-shadow: 0px 4px 2px grey;
+    transform: translateY(4px);
+}
